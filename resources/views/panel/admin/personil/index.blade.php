@@ -12,44 +12,53 @@
                 </h2>
                 <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
                     <div class="accordion-body">
-                        <form action="{{ route('personil.store') }}" class="p-3" method="POST"
+                        <form action="{{ route('personil.store') }}" class="mx-3" method="POST"
                             enctype="multipart/form-data">
                             @csrf
-                            <div class="mb-3 row">
-                                <label for="nama" class="form-label col-md-2">Nama Lengkap</label>
-                                <input required name="first_name" type="text" class="form-control col-md-4 me-1 col-sm-2"
-                                    placeholder="Nama Depan" aria-label="Recipient's username"
-                                    aria-describedby="button-addon2">
-
-                                <input required name="last_name" type="text" class="form-control col-md-4  col-sm-2"
-                                    placeholder="Nama Belakang" aria-label="Recipient's username"
-                                    aria-describedby="button-addon2">
+                            <div class="row mb-2">
+                                <div class="col-md-6 col-sm-12">
+                                    <label for="nama" class="form-label my-auto pb-1">Nama
+                                        Lengkap</label>
+                                    <div class="d-flex gap-1">
+                                        <input required name="first_name" type="text"
+                                            class="form-control col-md col-sm-3" placeholder="Nama Depan"
+                                            aria-label="Recipient's username" aria-describedby="button-addon2">
+                                        <input required name="last_name" type="text" class="form-control col-md col-sm-3"
+                                            placeholder="Nama Belakang" aria-label="Recipient's username"
+                                            aria-describedby="button-addon2">
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-12">
+                                    <label for="email" class="form-label my-auto pb-1">Email</label>
+                                    <div class="input-group col p-0">
+                                        <input type="text" class="form-control col-md col-sm-3" name="email"
+                                            placeholder="Email" aria-label="Recipient's username"
+                                            aria-describedby="basic-addon2">
+                                        <span class="input-group-text" id="basic-addon2">@gmail.com</span>
+                                        <input type="hidden" name="gmail" value="@gmail.com">
+                                    </div>
+                                </div>
                             </div>
-                            <div class="mb-3 row">
-                                <label for="email" class="form-label col-md-2">Email</label>
-                                <div class="input-group p-0 col-md-8 col-sm-2">
-                                    <input type="text" class="form-control" name="email" placeholder="Email"
-                                        aria-label="Recipient's username" aria-describedby="basic-addon2">
-                                    <span class="input-group-text" id="basic-addon2">@gmail.com</span>
-                                    <input type="hidden" name="gmail" value="@gmail.com">
+                            <div class="row mb-2">
+                                <div class="col-md-6 col-sm-12">
+                                    <label for="jabatan" class="form-label my-auto pb-1">Jabatan</label>
+                                    <input required name="jabatan" type="text" class="form-control col"
+                                        placeholder="Jabatan" aria-label="Recipient's username"
+                                        aria-describedby="button-addon2">
+                                </div>
+                                <div class="col-md-6 col-sm-12">
+                                    <label for="phone" class="form-label my-auto pb-1">Nomor Telepon</label>
+                                    <input required name="phone" type="number" class="form-control col"
+                                        placeholder="Nomor Telepon" aria-label="Recipient's username"
+                                        aria-describedby="button-addon2">
                                 </div>
                             </div>
                             <div class="mb-3 row">
-                                <label for="jabatan" class="form-label col-md-2">Jabatan</label>
-                                <input required name="jabatan" type="text" class="form-control col-md-8 col-sm-2"
-                                    placeholder="Jabatan" aria-label="Recipient's username"
-                                    aria-describedby="button-addon2">
-                            </div>
-                            <div class="mb-3 row">
-                                <label for="phone" class="form-label col-md-2">Nomor Telepon</label>
-                                <input required name="phone" type="number" class="form-control col-md-8 col-sm-2"
-                                    placeholder="Nomor Telepon" aria-label="Recipient's username"
-                                    aria-describedby="button-addon2">
-                            </div>
-                            <div class="mb-3 row">
-                                <label for="image" class="form-label col-md-2">Foto</label>
-                                <input required name="image" type="file" class="form-control col-md-8 col-sm-2"
-                                    aria-label="Recipient's username" aria-describedby="button-addon2">
+                                <div class="col-md-6 col-sm-12">
+                                    <label for="image" class="form-label my-auto pb-1">Foto</label>
+                                    <input required name="image" type="file" class="form-control col"
+                                        aria-label="Recipient's username" aria-describedby="button-addon2">
+                                </div>
                             </div>
                             <button type="submit" class="btn btn-primary btn-sm">Submit</button>
                         </form>
@@ -63,10 +72,10 @@
                 <span>Data Personil</span>
             </div>
             <div class="card-body overflow-auto" style="height: 100%">
-                <table class="table table-bordered dataTable" id="dataTable" width="100%">
+                <table class="table table-bordered dataTable table-hover table-striped" id="dataTable">
                     <thead>
                         <tr>
-                            <th>#</th>
+                            <th class="text-start">#</th>
                             <th>Nama</th>
                             <th>Email</th>
                             <th>Telepon</th>
@@ -77,7 +86,7 @@
                     <tbody>
                         @foreach ($data as $item)
                             <tr>
-                                <td>{{ $loop->iteration }}</td>
+                                <td class="text-start">{{ $loop->iteration }}</td>
                                 <td>{{ $item['name'] }}</td>
                                 <td>{{ $item['email'] }}</td>
                                 <td>{{ $item['phone'] }}</td>
@@ -86,7 +95,11 @@
                                     <div class="d-flex gap-1">
                                         <button class="btn btn-sm btn-primary" data-bs-toggle="modal"
                                             data-bs-target="#modalEdit{{ $item['id'] }}">Edit</button>
-                                        <button class="btn btn-sm btn-danger">Delete</button>
+                                        <form action="{{ route('personil.destroy', $item['id']) }}" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button class="btn btn-sm btn-danger">Delete</button>
+                                        </form>
                                     </div>
                                 </td>
                             </tr>
@@ -104,12 +117,13 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h1 class="modal-title fs-5" id="modalEditLabel">Edit Data Personil</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        {{-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> --}}
                     </div>
                     <div class="modal-body">
-                        <form action="{{ route('personil.update', $item['id']) }}" class="p-3" method="GET"
+                        <form action="{{ route('personil.update', $item['id']) }}" class="px-3" method="POST"
                             enctype="multipart/form-data">
                             @csrf
+                            @method('PUT')
                             <div class="mb-3 row">
                                 <label for="nama" class="form-label col-md-3">Nama Lengkap</label>
                                 <input required name="first_name" type="text"
@@ -149,11 +163,18 @@
                             </div>
                             <div class="mb-3 row">
                                 <label for="image" class="form-label col-md-3">Foto Lama</label>
-                                <img class="img-fluid" style="width: 150px; height: 150px; object-fit: cover; transition: 0.2s ease;" src="{{ asset('assets/panel/admin/images/personil/' . $item['image']) }}"
-                                    alt="Image of {{ $item['name'] }}" onMouseOver="this.style.width='200px';this.style.height='200px';"
+                                <img class="img-fluid"
+                                    style="width: 150px; height: 150px; object-fit: cover; transition: 0.2s ease; cursor: zoom-in;"
+                                    src="{{ asset('assets/panel/admin/images/personil/' . $item['image']) }}"
+                                    alt="Image of {{ $item['name'] }}"
+                                    onMouseOver="this.style.width='250px';this.style.height='250px';"
                                     onMouseOut="this.style.width='150px';this.style.height='150px'">
                             </div>
-                            <button type="submit" class="btn btn-primary btn-sm">Submit</button>
+                            <div class="row gap-2">
+                                <button type="submit" class="btn btn-primary btn-sm col-2">Submit</button>
+                                <button type="button" class="btn btn-secondary btn-sm col-2"
+                                    data-bs-dismiss="modal">Close</button>
+                            </div>
                         </form>
                     </div>
                 </div>

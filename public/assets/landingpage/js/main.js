@@ -19,7 +19,9 @@
     // Sticky Navbar
     $(window).scroll(function () {
         if ($(this).scrollTop() > 300) {
-            $('.sticky-top').addClass('bg-white shadow-sm').css('top', '-1px');
+            $('.sticky-top').addClass('shadow-sm').css('top', '-1px');
+        } else {
+            $('.sticky-top').removeClass('shadow-sm').css('top', '-1px');
         }
     });
 
@@ -40,8 +42,9 @@
 
 
     // Back to top button
+    $('.back-to-top').hide();
     $(window).scroll(function () {
-        if ($(this).scrollTop() > 300) {
+        if ($(this).scrollTop() > 100) {
             $('.back-to-top').fadeIn('slow');
         } else {
             $('.back-to-top').fadeOut('slow');
@@ -51,7 +54,6 @@
         $('html, body').animate({scrollTop: 0}, 1500, 'easeInOutExpo');
         return false;
     });
-
 
     // Modal Video
     var $videoSrc;
@@ -65,7 +67,6 @@
     $('#videoModal').on('hide.bs.modal', function (e) {
         $("#video").attr('src', $videoSrc);
     })
-
 
     // Testimonial carousel
     $(".testimonial-carousel").owlCarousel({

@@ -16,10 +16,10 @@
                     <a href="#profil" class="btn btn-primary py-3 px-5 animated slideInRight">Tentang
                         Kami</a>
                 </div>
-                <div class="col-lg-6 d-lg-block d-none">
+                {{-- <div class="col-lg-6 d-lg-block d-none">
                     <img src="{{ asset('assets/landingpage/img/siswa.png') }}" alt=""
                         class="img-fluid siswa mx-auto">
-                </div>
+                </div> --}}
             </div>
         </div>
     </div>
@@ -201,31 +201,51 @@
     </div>
 
     <div class="container-fluid py-5 bg-white">
-        <div class="container">
-            <h1 class="display-6 text-dark mb-4">Kritik dan Saran</h1>
-            <form action="{{ route('kritikDanSaran.store') }}" method="POST">
-                @csrf
-                @method('POST')
+        <form action="{{ route('kritikDanSaran.store') }}" method="POST">
+            @csrf
+            @method('POST')
+            <div class="container">
+                <h1 class="display-6 text-dark mb-4">Kritik dan Saran</h1>
                 <div class="row">
-                    <div class="input-group mb-3 col-md-6">
-                        <label class="input-group-text" id="basic-addon1">Nama Lengkap</label>
-                        <input type="text" class="form-control" name="name" placeholder="Nama Lengkap"
-                            aria-label="Masukkan Nama Lengkap" aria-describedby="basic-addon1">
-                        <input type="hidden" value="@gmail.com" name="gmail">
+                    <div class="col-md-6">
+                        <div class="input-group mb-3">
+                            <label class="input-group-text" id="basic-addon1">Nama Lengkap</label>
+                            <input type="text" class="form-control" name="name" placeholder="Nama Lengkap"
+                                aria-label="Masukkan Nama Lengkap" aria-describedby="basic-addon1">
+                            <input type="hidden" value="@gmail.com" name="gmail">
+                        </div>
                     </div>
-                    <div class="input-group mb-3 col-md-6">
-                        <span class="input-group-text" id="basic-addon1">Email</span>
-                        <input type="text" class="form-control" name="email" placeholder="Email" aria-label="Masukkan Email"
-                            aria-describedby="basic-addon1"></input>
+                    <div class="col-md-6">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="basic-addon1">Email</span>
+                            <input type="text" class="form-control" name="email" placeholder="Email"
+                                aria-label="Masukkan Email" aria-describedby="basic-addon1"></input>
+                        </div>
                     </div>
                 </div>
-                <div class="input-group">
+                <div class="input-group mb-3">
                     <span class="input-group-text">Kritik dan saran</span>
-                    <textarea class="form-control" name="message" aria-label="With textarea" placeholder="Masukkan Kritik dan saran maksimal 250 kata" maxlength="250"></textarea>
+                    <textarea class="form-control" name="message" aria-label="With textarea"
+                        placeholder="Masukkan Kritik dan saran maksimal 250 kata" maxlength="250"></textarea>
                 </div>
-                <button type="submit" class="btn btn-primary mt-3">Kirim</button>
-            </form>
-        </div>
+                <div class="text-center">
+                    <h3>Berikan kami bintang</h3>
+                    <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
+                        @for ($i = 1; $i <= 5; $i++)
+                            <input type="radio" class="btn-check" name="rating" id="btnradio{{ $i }}"
+                                autocomplete="off" onclick="fillStar({{ $i }})" value="{{ $i }}">
+                            <label class="mx-2 h1" for="btnradio{{ $i }}">
+                                <i class="bi bi-star text-warning" style="cursor: pointer"
+                                    id="star{{ $i }}"></i>
+                            </label>
+                        @endfor
+                    </div>
+                </div>
+                <div class="d-flex justify-content-center">
+                    <button type="submit" class="btn btn-primary mt-3 w-25">Kirim</button>
+                </div>
+            </div>
+        </form>
     </div>
 
     <div class="container-fluid py-5">
@@ -233,12 +253,16 @@
             <div class="row gy-5 gx-0">
                 <div class="col-lg-6 pe-lg-5 wow fadeIn" data-wow-delay="0.3s">
                     <h1 class="display-6 text-white mb-4">Apa yang di katakan siswa tentang kami?</h1>
-                    <p class="text-white mb-5">Siswa kami sangat menghargai pengalaman belajar yang mereka dapatkan di sekolah ini. Menurut mereka, lingkungan yang ramah dan guru-guru yang berdedikasi membuat proses belajar menjadi menyenangkan dan bermanfaat. Beberapa siswa juga mengatakan bahwa mereka merasa didukung untuk mengembangkan bakat dan minat mereka, baik dalam bidang akademik maupun non-akademik. Berikut beberapa komentar dari siswa kami:</p>
+                    <p class="text-white mb-5">Siswa kami sangat menghargai pengalaman belajar yang mereka dapatkan di
+                        sekolah ini. Menurut mereka, lingkungan yang ramah dan guru-guru yang berdedikasi membuat proses
+                        belajar menjadi menyenangkan dan bermanfaat. Beberapa siswa juga mengatakan bahwa mereka merasa
+                        didukung untuk mengembangkan bakat dan minat mereka, baik dalam bidang akademik maupun non-akademik.
+                        Berikut beberapa komentar dari siswa kami:</p>
                 </div>
                 <div class="col-lg-6 mb-n5 wow fadeIn" data-wow-delay="0.5s">
                     <div class="bg-white p-4">
                         <div class="owl-carousel testimonial-carousel wow fadeIn" data-wow-delay="0.1s">
-                            @foreach($masukan as $index => $masukan)
+                            @foreach ($masukan as $index => $masukan)
                                 <div class="testimonial-item mx-3">
                                     <div class="icon-box-primary mb-4">
                                         <i class="bi bi-person-circle"></i>
@@ -253,7 +277,8 @@
                                             <p class="text-primary text-wrap">Siswa SMP Negeri 2 Kota Cirebon</p>
                                         </div>
                                     </div>
-                                    <p class="fs-5 mb-4" style="text-align: justify; word-wrap: break-word;">{{ $masukan->message }}</p>
+                                    <p class="fs-5 mb-4" style="text-align: justify; word-wrap: break-word;">
+                                        {{ $masukan->message }}</p>
                                 </div>
                             @endforeach
                         </div>
@@ -323,6 +348,17 @@
                 // Append the generated HTML to #rapor container
                 $('#rapor').append(raporHTML);
             });
+
+            // Function to fill stars
+            fillStar = (star) => {
+                for (let i = 1; i <= 5; i++) {
+                    if (i <= star) {
+                        $('#star' + i).removeClass('bi-star').addClass('bi-star-fill');
+                    } else {
+                        $('#star' + i).removeClass('bi-star-fill').addClass('bi-star');
+                    }
+                }
+            }
         });
     </script>
 @endsection

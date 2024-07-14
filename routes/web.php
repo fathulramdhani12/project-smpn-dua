@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\BeritaController;
+use App\Http\Controllers\ekskulController;
 use App\Http\Controllers\GalleriesController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\kritikDanSaranController;
@@ -15,6 +16,7 @@ Route::get('/', [LandingPageController::class, 'index'])->name('home');
 Route::get('/galleries', [LandingPageController::class, 'galleries'])->name('galleries');
 Route::get('/informasi', [LandingPageController::class, 'informasi'])->name('informasi');
 Route::get('/profile', [LandingPageController::class, 'profile'])->name('profile');
+Route::get('/ekskul', [LandingPageController::class, 'ekskul'])->name('ekskul');
 Route::post('/kritik-dan-saran', [LandingPageController::class, 'kritikDanSaran'])->name('kritikDanSaran.store');
 Route::resource('/home', LandingPageController::class);
 
@@ -32,5 +34,6 @@ Route::prefix('/panel/admin/')->group(function () {
     Route::resource('/berita', BeritaController::class);
     Route::resource('/galleries', GalleriesController::class);
     Route::resource('/masukan', kritikDanSaranController::class);
+    Route::resource('/ekskul', ekskulController::class);
     Route::resource('/setting', SettingController::class);
 });
